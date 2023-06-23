@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="52.905754mm"
+   height="42.150761mm"
+   viewBox="0 0 52.905754 42.150761"
+   version="1.1"
+   id="svg5"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-36.209947,-26.635095)">
+    <ellipse
+       style="fill:#e6e6e6;fill-opacity:1;stroke:#000000;stroke-width:0.54305;stroke-opacity:1"
+       id="path1136"
+       cx="62.662823"
+       cy="47.710476"
+       rx="26.181353"
+       ry="20.803856"
+       inkscape:export-filename="logo1.svg"
+       inkscape:export-xdpi="95.9"
+       inkscape:export-ydpi="95.9" />
+    <path
+       id="path234"
+       style="stroke-width:0.754624"
+       d="m 56.399792,64.35784 c -10.314763,-10e-7 -18.67653,-7.534014 -18.67653,-16.827692 0,-9.293677 8.361767,-16.827691 18.67653,-16.827692 -9.414169,4.013058 -9.860432,28.435433 0,33.655384 z"
+       sodipodi:nodetypes="cscc"
+       inkscape:export-filename="logo1.svg"
+       inkscape:export-xdpi="95.9"
+       inkscape:export-ydpi="95.9" />
+    <path
+       id="path234-3"
+       style="fill:#7f2aff;stroke-width:0.847107"
+       d="m 63.468303,48.341815 c 0.232856,8.488333 12.493708,12.599555 21.389343,6.544398 -1.328256,4.943153 -7.322159,11.096261 -17.898991,11.495142 -11.700501,0.441258 -15.784271,-8.696341 -15.784271,-19.011103 0,-10.314763 4.073752,-18.229061 15.784271,-18.341958 9.464853,-0.09125 14.318547,6.342133 17.966082,11.344801 -12.481197,-6.59221 -21.68929,-0.519613 -21.456434,7.96872 z"
+       sodipodi:nodetypes="zcssscz" />
+    <circle
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.794999"
+       id="path1023"
+       cx="74.030022"
+       cy="47.829964"
+       r="9.0256357" />
+  </g>
+</svg>
