@@ -51,4 +51,56 @@ not immediately available.
 
 # Name Spacing
 
+First thing we will do is create name spaces for our classes in the Core directory.
+
+we do this by typing `namespace Core` at the top of the file below the php tag
+
+once we do this everything breaks of course because we moved the database class into
+a completely different name space. 
+
+to fix this lests go to where the class is being instanciated and add `Core\` in
+front of it. That is a backslash not a forward slash.
+
+Another way to do it is to type `use Core\Database` at the top of the file. 
+
+Then you can leave the other entry as it was.
+
+Now this has also broken our Lazy Loader Function so we will have to refactor it.
+
+So now in order to fix our lazy loader we have to turn `Core\Database` into `Core/Database`
+
+and we do that using the `str_replace()` php function. Its arguments in order are
+The pattern to match, the string we want to replace the pattern with, and the original string
+
+`str_replace($search, $replace, $subject)`
+
+## Problem with the PDO Class
+
+Now since we are calling the PDO class inside the Database file which we put 
+`namespace Core` at the top of, now all class declarations in this file are 
+going to default to the Core namespace. The PDO class is part of the Global
+Namespace. So to fix this we will put a `\` backslash infront of the PDO 
+declarations and then it will know to look in the global namespace. 
+
+OR... 
+
+We can type `use PDO` at the top of the file and that fixes the problem as well.
+And seeing this is kinda like documentation telling you that this class is used in this 
+file. 
+
+So now we will be seeing these `use Class` statements at the beginning of files
+often,
+
+# Request Types
+
+
+## Updating the Router to handle Request Types
+
+
+# Service Containers
+
+
+
+
+
 
