@@ -237,4 +237,12 @@ Then we can do the exact same thing to the bind method as well. So now all we
 need to worry about is the App class. It then deals with the container class.
 
 
+# Edit and update note functinality
+
+Lets duplicate the create view since it looks just like what we want..
+
+Then from there it is good to start at the route level.
+
+
+
 

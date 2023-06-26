@@ -6,7 +6,6 @@ use Core\App;
 
 $db = App::resolve(Database::class);
 
-
 $errors = [];
 
 
