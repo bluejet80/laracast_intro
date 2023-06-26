@@ -6,7 +6,7 @@ $config = require base_path("config.php");
 
 $db = new Database($config['database'], $config['auth']['user'], $config['auth']['password']);
 
-$errors = []
+$errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 

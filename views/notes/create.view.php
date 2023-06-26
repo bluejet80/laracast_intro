@@ -36,5 +36,5 @@ require base_path("views/partials/banner.php");
 </div>
 
 <?php
-require base_path("views/partials/footer.php";
+require base_path("views/partials/footer.php");
 ?>
