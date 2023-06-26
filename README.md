@@ -106,12 +106,79 @@ can be used.
 
 ## Updating the Router to handle Request Types
 
+In this lesson we basically re-made Express in PHP
+
 
 
 
 # Service Containers
 
+First of all, the purpose of this service container is to prevent from having to
+create an instance of the database everytime we need to use it. To prevent us
+from having this code at the top of each file that get information from the
+database. 
 
+```
+
+    $config = require base_path("config.php");
+
+    $db = new Database($config['database'], $config['auth']['user'],$config['auth']['password']);
+
+
+
+```
+
+So we dont want to have to instantiate our database calss just to execute some 
+SQL query. 
+
+So basically what we want is to instantiate it once and then throw it into a
+container and then pull it out whenever we need it. 
+
+
+## playground
+
+In order to test this new container it would be nice to have a file to do so in.
+
+So lets make a file `bootstrap.php` and then import it into our index.php file.
+
+Right beneith the `spl_autoload_register()` function.
+
+
+## Bind
+
+The bind method in the container does something, it binds or adds something to
+the container. 
+
+But after it is setup we want to be able to use the bind method by giving it
+two things to bind together.
+
+So what we could do is bind the path to our Database instance `Core\Database`
+to a function that instanciates it. 
+
+So its like a key value pair, the key is the path and the value is the function.
+
+So this helper function will just contain that which we have been doing at the
+top of the file each time. 
+
+So now we have a string which is an identifier or a key to this binding, then 
+we have a function that is responsible for building up the object. Some would 
+call this a Factory Function. 
+
+Next... 
+
+When we bind something into the container we need to save it somewhere, we need
+to cache it. Therefore we will create an array called `$bindings`.
+
+Then when the bind method is called we will push to that $bindings array. Which
+is an associative array.
+
+Next...
+With our resolve function we wanna do the opposite we wanna take it out of the
+container. And how do we do that? Well we would probably call the builder function
+and then return the results.
+
+Well first check to see if the key exists in our `$bindings` array and then if
+it doesnt, throw an Exception. But otherwise carry on..
 
 
 
