@@ -1,11 +1,6 @@
 <?php
 
 
-
-$pageTitle = "This is the HomePage";
-
-
-
-
-
-require "views/index.view.php";
+view("index.view.php", [
+    'pageTitle' => 'This is the Homepage'
+]);
