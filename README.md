@@ -93,8 +93,20 @@ often,
 
 # Request Types
 
+A question that you must ask yourself when thinking about request types, is the 
+request idempotent? If something is idempotent that  means when you make a request 
+to it, does it actually change anything. Like a GET request to view a page, this is 
+idempotent. But a request to create a note, or delete a note, or update a note...
+All of these things are not idempotent. So you should use something other than a 
+GET request for these. 
+
+Of course we already know about all the request types POST, DELETE, PUT, PATCH that 
+can be used.
+
 
 ## Updating the Router to handle Request Types
+
+
 
 
 # Service Containers

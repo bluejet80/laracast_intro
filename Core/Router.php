@@ -1,5 +1,33 @@
 <?php
 
+namespace Core;
+
+class Router {
+
+    protected $routes = []
+
+    public function get($uri, $controller) {
+
+        }
+
+    public function post($uri, $controller) {
+
+        }
+
+    public function delete($uri, $controller) {
+
+        }
+
+    public function patch($uri, $controller) {
+
+        }
+
+
+
+    }
+
+
+
 $routes = require base_path("routes.php");
 
 
