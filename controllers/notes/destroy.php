@@ -9,16 +9,14 @@ $db = new Database($config['database'], $config['auth']['user'],$config['auth'][
 $currentUserId = 1;
 
 
-
 $note = $db->query("select * from notes where id = :id", [
-    'id' => $_GET['id']
+    'id' => $_POST['id']
 ])->findOrFail();
-
 
 authorize($note['user_id'] === $currentUserId);
 
+$db->query("delete from notes where id = :id", ['id' => $_POST['id']]);
 
-view("notes/show.view.php", [
-    'pageTitle' => 'User Note',
-    'note' => $note
-]);
+header('location: /notes');
+exit();
+
