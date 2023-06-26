@@ -180,6 +180,61 @@ and then return the results.
 Well first check to see if the key exists in our `$bindings` array and then if
 it doesnt, throw an Exception. But otherwise carry on..
 
+## Next Problem
+
+So all of that seems to be working well but unfortunately we have a new problem.
+
+Now if I go into one of my containers, how do I grab that instance? Will i be
+forced to type all of the code that is in the bootstrap.php file each time?
+
+Of course not, that would defeat the whole purpose. But this does show that we 
+need a place to buildup our container and have access to it from anywhere in our
+application. 
+
+So in order to do this we need to make an App Class.
+
+## App Class
+
+The starting of the container will be delegated to the app class.
+
+
+Right away within this App Class we will create a static method `setContainer()`.
+
+Static Methods in PHP are ones that can be called without having to instanciate
+the class first. Very Handy.
+
+You could run it by saying: `App::setContainer();`
+
+Then to get the container you just type: `App::container();`
+
+This class is an example of a Singleton Design Pattern.
+
+
+So now we have replaced this:
+
+```
+    $config = require base_path("config.php");
+
+    $db = new Database($config['database'], $config['auth']['user'],$config['auth']['password']);
+
+```
+
+With this: `$db = App::container()->resolve('Core\Database');`
+
+Much Better.
+
+
+But it would be even better if we would only have to write:
+`$db = App::resolve(Database::class)`
+
+To do this we will just need to create another static method inside or App Class.
+
+The resolve method is presently only available in our Container Class. But we can
+create a resolve method is the App class that just delegates the work to the 
+resolve method in the container class.
+
+Then we can do the exact same thing to the bind method as well. So now all we
+need to worry about is the App class. It then deals with the container class.
 
 
 
