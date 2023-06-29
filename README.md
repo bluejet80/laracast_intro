@@ -244,5 +244,17 @@ Lets duplicate the create view since it looks just like what we want..
 Then from there it is good to start at the route level.
 
 
+# Sessions
+
+sessions use the `$_SESSION` super global. but before you can have access to 
+that super global, you must start the session.
+
+And this is done with `session_start();`
+
+
+The sessions on my machine are save in the path: /var/lib/php/sessions
+
+
+So after the person has logged in then you will start the session.
 
 
