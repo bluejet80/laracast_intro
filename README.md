@@ -5,7 +5,9 @@ to install a tailwind plugin while using the CDN
 
 in the script tag where you src tailwind CDN just add `?plugins=forms`
 
-manually submitting the form
+# Security concern
+
+this is how you would manually submitting the form
 
 curl -X POST http://localhost:1234/notes/create -d 'body=Hello+there'
 
@@ -25,7 +27,7 @@ only when we create an instance of them.
 
 1. remove the Database and Response requires in the index.php
 
-2. then intead of these requires we will call a php function `spl_autoload_register()`
+2. then instead of these requires we will call a php function `spl_autoload_register()`
 
 This function takes as its first parameter a function to which we will pass a $class and 
 immediately we will dd() that $class so that we can see what is happening. 
@@ -37,10 +39,10 @@ Actually what is happening is PHP doesnt know what the Class is and so its tryin
 track it down by running this function. So this function would be run when you 
 instanciate a class and its undefined to php. 
 
-By setting up this functio we have 'declared' oyur implementation for how we should 
+By setting up this function we have 'declared' our implementation for how we should 
 auto-load files that arnt immediately available.
 
-Now we must figure out what is the logic? What should we do? 
+Now we must figure out what is the logic? What should we do? Inside this function.
 
 So the first thing to do is what we were doing before. Require the class. 
 
@@ -58,10 +60,11 @@ we do this by typing `namespace Core` at the top of the file below the php tag
 once we do this everything breaks of course because we moved the database class into
 a completely different name space. 
 
-to fix this lests go to where the class is being instanciated and add `Core\` in
+to fix this lets go to where the class is being instanciated and add `Core\` in
 front of it. That is a backslash not a forward slash.
 
 Another way to do it is to type `use Core\Database` at the top of the file. 
+This is how we will do it.
 
 Then you can leave the other entry as it was.
 
@@ -108,6 +111,45 @@ can be used.
 
 In this lesson we basically re-made Express in PHP
 
+to begin with we create a route method in the router class and then 
+we will create methods for each one of the request types.
+
+we create a dataset that will be all the routes. So when the app begins it goes
+through all the routes and creates this dataset of all the routes and we can 
+add attributes to each one of the items in the routes dataset.
+
+then we create a method called route that accepts the current uri and finds the 
+necessary info from within the routes dataset.
+
+loop over all of the routes and as we are doing this check to see if that routs uri
+matches the current uri and if it does then we `return base_path($route['controller'])`
+
+if none of the routes match the current uri then there is no page for that and we
+    call the abort() function.
+
+we need to accept a request type so we know what request type it is. 
+
+to do this we can create a hidden input method that has the value of the request
+type that we want.
+
+then we check if that value was recieved from the `$_POST` if it was use it , if
+not just use the request method specified in the `$_SERVER` super global
+
+then we pass that request type to our route method.
+
+then when we check for the uri we will also check for the request method.
+
+So to our router initally we pass the uri, and the controller associated with
+that uri and we use the appropriate method. GET POST PATCH DELETE
+
+`$router->get('/notes','controller/notes/index.php');`
+
+the last thing we do is create an add method that adds the route to the routes
+dataset so that we can clean up each one of the request methods.
+
+so inside each request method it is only;
+
+`$this-add('POST', $uri, $controller);`
 
 
 
