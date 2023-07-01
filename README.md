@@ -258,3 +258,65 @@ The sessions on my machine are save in the path: /var/lib/php/sessions
 So after the person has logged in then you will start the session.
 
 
+# Form Flow
+
+Often when you have a form that is being filled out by the user. Several things
+happen once the form is submitted. These are:
+
+
+1. Validate the Form
+2. Run a Database Query
+3. Respond in a certain way dependent upon the state of the database
+4. Append things to the Session or the cache mark the user as logged in
+5. Redirect the user to an appropriate page.
+
+
+# Middleware
+
+So the first thing that we do is attach another method called only() to the 
+routes in our router that the status of the user will be checked. Either logged
+in or not.
+
+Then we must create the method in the Router class.
+
+And to be able to chain methods we always need to return `$this` return the
+instance so that we can keep working with it.
+
+Then we added a property to the routes object that was called middleware and 
+we set it initially to null. 
+
+But then if our route passes through a middleware then we will change that
+property to whatever the middleware is.
+
+Then when we go to fetch the route we can check for the middleware key and if
+it exists then do what is necessary stuff for that particular middleware.
+
+## Middleware classes
+
+So we setup a class for each of the middleware and each class has a `handle()`
+method in it.
+
+But we are still haveing to go to the router file and update it each time 
+we add a new middleware. 
+
+So right now the  middleware key itself points to the desired middleware class.
+
+How bout setting up a lookup table...
+
+First we begin by making a sortof Parent class for the middlewares, just called
+Middleware.
+
+and then inside that class we have a dataset that is a map, call it MAP.
+
+then in the router we will just pass the key to this map and it will return
+the desired class and then we can instanciate it and run the handle method.
+
+And every class will have a handle method. 
+
+So now we never have to go back into the router file we can just add a line to 
+the MAP and then create the appropriate class for the middleware and put the 
+funcitonality within the handle mehtod of that class.
+
+
+
+

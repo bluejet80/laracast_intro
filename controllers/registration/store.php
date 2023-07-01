@@ -52,6 +52,10 @@ $db->query('INSERT INTO users(name, email, password) VALUES(:name, :email, :pass
 
     // mark that the user has logged in
 
+$_SESSION['user'] = [
+    'isLoggedIn' => true,
+    'email' => $email,
+];
 
 
 header('location: /notes');
