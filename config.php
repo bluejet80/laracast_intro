@@ -9,7 +9,7 @@ return [
     ],
     'auth' => [
         'user' => 'bluejet',
-        'password' => 'Afterlife1980'
+        'password' => 'Afterlife1980!'
     ]
 
 ];

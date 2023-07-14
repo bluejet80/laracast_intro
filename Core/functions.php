@@ -38,3 +38,9 @@ function view($path, $attributes = []) {
 
     require base_path('views/' . $path);
     }
+
+function login($user) {
+
+        $_SESSION['user'] = $user;
+
+    }

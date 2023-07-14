@@ -39,7 +39,7 @@ if($user) {
     //Someone with that email already exists
     // If yes redirect to login page
 
-    header('location: /login');
+    header('location: /sessions');
     exit();
 } else {
     // If no, save one to the database, and then log the user in, and redirect
@@ -47,15 +47,13 @@ if($user) {
 $db->query('INSERT INTO users(name, email, password) VALUES(:name, :email, :password)', [
     'name' => $name,
     'email' => $email,
-    'password' => $password
+    'password' => password_hash($password, PASSWORD_DEFAULT)
 ]);
 
     // mark that the user has logged in
 
-$_SESSION['user'] = [
-    'isLoggedIn' => true,
-    'email' => $email,
-];
+
+login($user);
 
 
 header('location: /notes');

@@ -12,7 +12,6 @@
               <a href="/about" class="<?= urlIs('/about') ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white" ?> rounded-md px-3 py-2 text-sm font-medium">About</a>
               <a href="/notes" class="<?= urlIs('/notes') ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white" ?> rounded-md px-3 py-2 text-sm font-medium">Notes</a>
               <a href="/contact" class="<?= urlIs('/contact') ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white" ?> rounded-md px-3 py-2 text-sm font-medium">Contact</a>
-              <a href="/register" class="<?= urlIs('/register') ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white" ?> rounded-md px-3 py-2 text-sm font-medium">Register</a>
             </div>
           </div>
         </div>
@@ -34,9 +33,17 @@
                   <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
                 </button>
                 <?php else : ?>
-                 <a href="/register" class="text-white">Register</a>
+                 <a href="/register" class="<?= urlIs('/register') ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white" ?> rounded-md px-3 py-2 text-sm font-medium">Register</a>
+                 <a href="/sessions" class="<?= urlIs('/sessions') ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white" ?> rounded-md px-3 py-2 text-sm font-medium">Log In</a>
                  <?php endif; ?>
               </div>
+
+              <?php if ($_SESSION['user'] ?? false) : ?>
+                <div class="relative ml-3">
+                    
+                 <a href="/logout" class="<?= urlIs('/logout') ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white" ?> rounded-md px-3 py-2 text-sm font-medium">Logout</a>
+                </div>
+              <?php endif; ?>
 
               <!--
                 Dropdown menu, show/hide based on menu state.
