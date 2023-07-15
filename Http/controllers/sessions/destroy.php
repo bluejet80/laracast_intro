@@ -5,7 +5,5 @@
 
 logout();
 
-
-header('location: /');
-exit();
+redirect('/');
 

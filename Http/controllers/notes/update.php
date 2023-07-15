@@ -49,8 +49,8 @@ $db->query('update notes set body = :body where id = :id',[
 
 // redirect user
 
-header('location: /notes');
-die();
+redirect('/notes');
+
 
 
 
