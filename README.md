@@ -519,6 +519,69 @@ of this specific file that we've been working in and making this same
 functionality available to other forms that we may have without having to 
 rewrite it for every form. 
 
+The first step is to move the form validation out of the conditional and 
+to a upper level. This is not going to work as we want it to but how could
+we make it work
+
+
+First thing he does is combine the form intanciation and the call to validate.
+
+`LoginForm::validate($email,$password);`
+
+Now to do this we will have to make the Validate method a staic method
+or function. That turns it into a static Constructor. Its a static entry
+point to instanciate your class. 
+
+So then if we added a constructor above it and we take in the `$email` and
+`$password` as arguments. But we ould also just pass an array of `$attributes`.
+
+Then the Validate functio could also take in an Array of `$attributes` and
+then, here is the best part, then we move the funcitonality of the validate
+function into the constructor so that it automatically happens when the 
+class is instanciated.
+
+Now whenever you instanciate this form we immediately validate it and 
+populate the errors.
+
+Now witin our static constructor Validate we will begin by instanciating
+the class and creating an instance variable.
+
+Now we have to switch up the API a bit, before the validate function would
+return a boolean.. But now lets have it throw an Exception.
+
+Ok so we threw an exception.. so now how do we deal with it?
+
+We will attack this in two steps:
+
+The first option is to wrap the LoginForm::Validate into a Try/Catch block.
+
+When we do this we no longer have access to the `$form` Sinstance so how do 
+we fix this?
+
+we we can go into our ValidationException class and add a static function,
+and then within this function we will instanciate our ValidationException 
+class and create an instance variable and then throw it.
+
+So before this our code looked like this:
+`throw new ValidationException();`
+
+and now it looks like this:
+`ValidationException::throw();`
+
+
+
+# authentication Exception
+
+With the form validations working, after I had to alter some things cause
+I am still using PHP 7 somehting.... 
+
+To get the Authentication to work we need to have and method or a way of
+manually throwing an exception.
+
+
+
+
+
 
 
 

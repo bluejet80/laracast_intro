@@ -8,7 +8,7 @@ use Core\Session;
 
 class Authenticator {
 
-    public function attempt() {
+    public function attempt($email,$password) {
         $user = App::resolve(Database::class)->query('select * from users where email = :email', [
             'email' => $email
         ])->find();
@@ -46,3 +46,4 @@ class Authenticator {
 
         Session::destroy();
     }
+}
