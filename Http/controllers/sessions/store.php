@@ -2,6 +2,7 @@
 
 use Core\Validator;
 use Core\Authenticator;
+use Core\Session;
 
 use Http\Forms\LoginForm;
 
@@ -25,9 +26,17 @@ if ($form->validate($email, $password)){
 
 }
 
-
-return view('sessions/create.view.php',[
-    'errors' => $form->errors()
+Session::flash('errors',$form->errors());
+Session::flash('old',[
+    'email' => $_POST['email']
 ]);
+
+//$_SESSION['_flash']['errors'] = $form->errors();
+
+return redirect('/sessions');
+
+//return view('sessions/create.view.php',[
+//    'errors' => $form->errors()
+//]);
 
 

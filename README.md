@@ -361,4 +361,167 @@ funcitonality within the handle mehtod of that class.
 
 
 
+# Talk through the file and try to determine nouns and verbs
+
+This is an important part of refactoring. For readability purposes. 
+
+Right now we are working with the Session Store.php file
+
+And while talking through it we have created some classes and added methods
+that help to delegate the funtioning of the file to the verbs, the methods
+that should be handling these actions.
+
+Its like good management. You can either do it all yourself in the file and
+micro-manage the whole process OR.. 
+
+You can delegate, you can create classes and methods to do the specific
+tasks and then within the file delegate those tasks to those methods and
+imporove the readability of the file and make things more modular and 
+abstract as well. We dont want to hard-code or have to specify all this 
+stuff in this file, because there will be other files that will need
+to persom similar tasks and if then they can delegate those tasks just
+as we have in this file then. There is work that we dont have to do again.
+
+It is also difficult to remember specific things and so it is much easier
+to call a method from a class and within that method are all the details but
+all you must remember is the name of the method. And intuitively you make 
+the name off of the verbs that you come up with when you are speaking out
+the file. 
+
+Spoken File:
+
+We run the file
+we get the form data
+we instanciate(create) and new form and then validate the data on it.
+Then if that passes we initialize a new Authenticator and Attempt to 
+authenticate the user.
+If that passes they are redirected to the home page
+If that fails then we add the error to the errors array
+and then at the end the last thing which is hit if there is any problems before
+as well...
+We return the create view and pass through the errors array.
+
+Thinking:
+
+Ok this is good so far but there is a major thing that we are missing and 
+that is a programming process that is often used when there is a validation
+error and we need to reload the page and pass old form data.
+
+This process is Post, Redirect, Get. Or PRG Pattern for short
+
+# Post Redirect Get
+
+So we use this pattern when we are making a post request, and instead of 
+sending raw html back with the errors.
+
+Currently the form validation fails and we are not redirecting to the login
+page, there is no 302 status code, instead we are just return some HTML directly
+from the POST request. And this is not a good practice. 
+
+If the user goes and tries to refreash the page then it will perform the POST
+request again and again. And we dont want this. This is duplicate form submission.
+
+Also if we leave and go to another page and then ty to hit the back button to 
+return then we get another error.. Document Expired, this document is no longer
+available.
+
+All of this is due to our current implementation where in responce to a POST
+request we just return a block of HTML.
+
+The PRG Pattern is a common approach used when hiting controllers and perfoming
+form validation.
+
+
+So what this means is: 
+
+we do a POST request when the form is submitted
+
+Then if there are any validation errors or problems
+
+we will Redirect the user to a new page where we then perform a GET request.
+
+
+# Implementation
+
+So the first thing that we do is to comment out the return View code and
+instead just redirect the user back to the login page.
+
+`return redirect('/sessions');`
+
+
+That solved some of the problems but now the issue is that we must find
+a way to pass through the errors.
+
+One way world be to add the errors[] array to the session.
+
+`$_SESSION['errors'] = $form->errors();`
+
+And then in our contoller, session create.php we can grab that errors
+array and pass it through.
+
+That works and we now have the errors displayed.. But if we go to another
+page or try to refresh, those errors never go away. 
+
+We need to somehow add the errors to the sesssion and then soon after, or 
+when a new page is loaded, flush the session of those errors.
+
+we need a way of expiring that key from the Session
+
+What we need is a way to distinguish from Data that should live in the 
+Session indefinitely or untill the user logs out. And Data that should only
+be in the Session for a moment and then be deleted. Data that is flashed
+to the session fro one page request and then immediately it is removed or
+expires.
+
+To do this we will create a custom key in the Session called `['_fash']`,
+we use the underscore to make sure that we are not overwritng any other
+key that may exist later in the Session.
+
+Now we will put all the data that is meant to be flashed to the session into
+this specific key.
+
+After doing this everything still works but now we need to determin WHERE
+in the flow of everything should we expire that data?
+
+If we go back into the entry point of the application `public/index.php` we
+can see the flow of everything. And from this it seems that the best place
+for this to happen would be after we have routed the request. That is after
+we have called the `route()` method on the uri.
+
+To do this we would type:
+
+`unset($_SESSION['_flash']);`
+
+And that seemed to work. But it is still not that good. Because whenever,
+where ever we want to implement this we will have to remember what actual
+key is called. We will have to remember its specific implementation. And
+we dont want to have to do that. It would be so much nicer if we could just
+run a method in a class to do all of this and then we would only have to
+remmeber the method, or the specific API of the class.
+
+
+With this current implementation the opportunity for things to get out of
+sync is pretty high.
+
+Within the core directory we are going to add a new class. This will be a
+very simple class. The class will contain Global functions, they will be
+static. These will be our helper methods.
+
+
+# Setting up Custom Exceptions
+
+The next thing we are gonna do is throw a global exception if we have a
+problem like failed form validation or user login info is incorrect. 
+
+Then we can have the freedom to do several things when that exception is 
+thrown. And again this is all about delegation and getting this logic outside
+of this specific file that we've been working in and making this same 
+functionality available to other forms that we may have without having to 
+rewrite it for every form. 
+
+
+
+
+
+
 
