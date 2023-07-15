@@ -10,7 +10,12 @@
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
               <a href="/" class="<?= urlIs('/') ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white" ?> rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Home</a>
               <a href="/about" class="<?= urlIs('/about') ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white" ?> rounded-md px-3 py-2 text-sm font-medium">About</a>
+
+
+              <?php if ($_SESSION['user'] ?? false) : ?>
               <a href="/notes" class="<?= urlIs('/notes') ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white" ?> rounded-md px-3 py-2 text-sm font-medium">Notes</a>
+              <?php endif; ?>
+
               <a href="/contact" class="<?= urlIs('/contact') ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white" ?> rounded-md px-3 py-2 text-sm font-medium">Contact</a>
             </div>
           </div>
@@ -37,11 +42,14 @@
                  <a href="/sessions" class="<?= urlIs('/sessions') ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white" ?> rounded-md px-3 py-2 text-sm font-medium">Log In</a>
                  <?php endif; ?>
               </div>
+            </div>
 
               <?php if ($_SESSION['user'] ?? false) : ?>
                 <div class="relative ml-3">
-                    
-                 <a href="/logout" class="<?= urlIs('/logout') ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white" ?> rounded-md px-3 py-2 text-sm font-medium">Logout</a>
+                 <form method="POST" action="/session">
+                    <input type=hidden name="_method" value="DELETE" />
+                    <button class="text-white">Log Out</button>
+                 </form>
                 </div>
               <?php endif; ?>
 
@@ -61,7 +69,6 @@
                 <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
                 <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
               </div> -->
-            </div>
           </div>
         </div>
         <div class="-mr-2 flex md:hidden">
